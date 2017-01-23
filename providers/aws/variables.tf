@@ -20,7 +20,21 @@ variable "project_name" {
   descriprion = "Project name is used when naming of resources for uniqueness"
 }
 
+variable "environment" {
+  default = "prod"
+  description = "application environment"
+}
+
 variable "availability_zones" {
   default = "eu-west-1a,eu-west-1b,eu-west-1c"
   description = "Availability zones to place the private/public subnets in"
+}
+
+variable "nat_instance_count" {
+  default = 1
+}
+
+variable "aws_ssh_key_file" {
+  default = "default"
+  description = "ssh public key file"
 }

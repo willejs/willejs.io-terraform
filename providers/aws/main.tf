@@ -19,6 +19,12 @@ module "vpc" {
   enable_dns_support = true
 }
 
+/* SSH Keypair */
+resource "aws_key_pair" "default" {
+  key_name   = "${var.project_name}-${var.environment}-default"
+  public_key = "${file("${path.root}/${var.aws_ssh_key_file}.pub")}"
+}
+
 /* NAT gateway */
 
 resource "aws_eip" "nat" {
@@ -36,4 +42,19 @@ resource "aws_route" "nat_instance" {
   route_table_id         = "${module.vpc.private_route_table_id}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${element(aws_nat_gateway.gw.*.id, count.index)}"
+}
+
+/* ECS Cluster */
+
+module "ecs_cluster_1" {
+  source = "../../modules/ecs_cluster"
+  instance_id = "1"
+  ec2_key_pair = "${aws_key_pair.default.key_name}"
+  project_name = "${var.project_name}"
+  // ACK: for now hardcode this
+  environment = "${var.environment}"
+  vpc_subnet = "${var.vpc_subnet}"
+  vpc_id = "${module.vpc.vpc_id}"
+  private_subnets    = "${module.vpc.private_subnets}"
+  public_subnets     = "${module.vpc.public_subnets}"
 }
