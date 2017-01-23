@@ -48,11 +48,6 @@ resource "aws_autoscaling_group" "ecs" {
   desired_capacity = 2
 }
 
-/* ecs service cluster */
-resource "aws_ecs_cluster" "default" {
-  name = "${var.project_name}-${var.environment}-ecs"
-}
-
 resource "aws_security_group" "ecs" {
   name        = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
   description = "Container Instance Allowed Ports"
