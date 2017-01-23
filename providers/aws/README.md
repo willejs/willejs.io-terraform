@@ -1,3 +1,12 @@
+## willejs.io Infrastructure
+
+## Intro
+
+This root module contains other modules and resources to create all infrastructure to run willejs.io
+
+## Requirements 
+
+[terraform-docs](https://github.com/segmentio/terraform-docs) to create documentation
 
 ## Inputs
 
