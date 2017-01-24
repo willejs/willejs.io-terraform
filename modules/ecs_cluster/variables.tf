@@ -46,3 +46,7 @@ variable "willejs_io_version" {
   description = "set the docker tag of the image to be deployed"
   default     = "latest"
 }
+
+variable "ssl_cert_arn" {
+  description = "This is the ARN of the ssl cert in certificate manager used with the ELBs"
+}
