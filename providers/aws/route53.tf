@@ -1,3 +1,4 @@
+// create zone for willejs.io domain
 resource "aws_route53_zone" "willejs_io" {
   name = "willejs.io"
 
@@ -6,6 +7,7 @@ resource "aws_route53_zone" "willejs_io" {
   }
 }
 
+// Create just the www.willejs.io record
 resource "aws_route53_record" "www_willejs_io" {
   zone_id = "${aws_route53_zone.willejs_io.zone_id}"
   name = "www.willejs.io"
@@ -15,3 +17,5 @@ resource "aws_route53_record" "www_willejs_io" {
     "${module.ecs_cluster_1.elb_dns_name}"
   ]
 }
+
+// TODO: Create record for S3 bucket that redirects A record to WWW.
