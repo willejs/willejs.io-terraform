@@ -27,9 +27,9 @@ resource "aws_elb" "ecs_asg_elb" {
 }
 
 resource "aws_security_group" "ecs_asg_elb" {
-  name          = "${var.project_name}-${var.environment}-elb-ecs-${var.instance_id}"
-  description   = "Security group allowing traffic to the ELB"
-  vpc_id        = "${var.vpc_id}"
+  name        = "${var.project_name}-${var.environment}-elb-ecs-${var.instance_id}"
+  description = "Security group allowing traffic to the ELB"
+  vpc_id      = "${var.vpc_id}"
 
   tags {
     Name        = "${var.project_name}-${var.environment}-elb-ecs-${var.instance_id}"

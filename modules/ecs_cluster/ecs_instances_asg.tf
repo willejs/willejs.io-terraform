@@ -1,9 +1,10 @@
 // Autoscaling group launch config
 resource "aws_launch_configuration" "ecs" {
-  image_id = "${var.ecs_image_id}"
-  instance_type        = "${var.instance_type}"
-  key_name             = "${var.ec2_key_pair}"
-  security_groups      = ["${aws_security_group.ecs.id}"]
+  image_id        = "${var.ecs_image_id}"
+  instance_type   = "${var.instance_type}"
+  key_name        = "${var.ec2_key_pair}"
+  security_groups = ["${aws_security_group.ecs.id}"]
+
   // A little hacky, but this is ok for now.s
   user_data            = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.default.name} > /etc/ecs/ecs.config"
   iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
@@ -27,8 +28,8 @@ resource "aws_autoscaling_group" "ecs" {
   load_balancers       = ["${aws_elb.ecs_asg_elb.name}"]
 
   tag {
-    key = "Name"
-    value = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
+    key                 = "Name"
+    value               = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
     propagate_at_launch = true
   }
 
@@ -69,7 +70,7 @@ resource "aws_security_group" "ecs" {
   }
 
   tags {
-    Name = "${var.project_name}-${var.environment}-ecs"
+    Name        = "${var.project_name}-${var.environment}-ecs"
     created-by  = "terraform"
     environment = "${var.environment}"
     project     = "${var.project_name}"

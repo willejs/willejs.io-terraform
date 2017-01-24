@@ -1,5 +1,5 @@
 variable "instance_type" {
-  default = "t2.nano"
+  default     = "t2.nano"
   description = "Tiny instances for docker containers"
 }
 
@@ -26,7 +26,8 @@ variable "vpc_subnet" {
 variable "vpc_id" {
   description = "VPC id"
 }
- // TODO: this should be a list
+
+// TODO: this should be a list
 variable "private_subnets" {
   description = "private subnets for ECS cluster nodes"
 }
@@ -37,11 +38,11 @@ variable "public_subnets" {
 
 variable "ecs_image_id" {
   // should look this up somehow.
-  default = "ami-e3fbd290"
+  default     = "ami-e3fbd290"
   description = "ecs optimised ec2 ami"
 }
 
 variable "willejs_io_version" {
   description = "set the docker tag of the image to be deployed"
-  default = "latest"
+  default     = "latest"
 }
