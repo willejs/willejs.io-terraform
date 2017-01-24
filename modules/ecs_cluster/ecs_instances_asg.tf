@@ -6,6 +6,7 @@ resource "aws_launch_configuration" "ecs" {
   security_groups      = ["${aws_security_group.ecs.id}"]
   // A little hacky, but this is ok for now.s
   user_data            = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.default.name} > /etc/ecs/ecs.config"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
 
   // Use a decent sized block device as docker containers can grow if not cleaned up.
   root_block_device {
@@ -23,11 +24,11 @@ resource "aws_autoscaling_group" "ecs" {
   name                 = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
   launch_configuration = "${aws_launch_configuration.ecs.name}"
   vpc_zone_identifier  = ["${split(",", var.private_subnets)}"]
-  //load_balancers       = ["${aws_elb.ecs_asg_elb_external.name}", "${aws_elb.ecs_asg_elb_internal.name}"]
+  load_balancers       = ["${aws_elb.ecs_asg_elb.name}"]
 
   tag {
     key = "Name"
-    value = "${var.project_name}-${var.environment}-ecs"
+    value = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
     propagate_at_launch = true
   }
 

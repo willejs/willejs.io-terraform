@@ -40,3 +40,8 @@ variable "ecs_image_id" {
   default = "ami-e3fbd290"
   description = "ecs optimised ec2 ami"
 }
+
+variable "willejs_io_version" {
+  description = "set the docker tag of the image to be deployed"
+  default = "latest"
+}

@@ -51,7 +51,6 @@ module "ecs_cluster_1" {
   instance_id = "1"
   ec2_key_pair = "${aws_key_pair.default.key_name}"
   project_name = "${var.project_name}"
-  // ACK: for now hardcode this
   environment = "${var.environment}"
   vpc_subnet = "${var.vpc_subnet}"
   vpc_id = "${module.vpc.vpc_id}"
