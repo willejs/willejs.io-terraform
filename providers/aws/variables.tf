@@ -17,7 +17,7 @@ variable "public_subnets" {
 
 variable "project_name" {
   default     = "willejsio"
-  descriprion = "Project name is used when naming of resources for uniqueness"
+  description = "Project name is used when naming of resources for uniqueness"
 }
 
 variable "environment" {

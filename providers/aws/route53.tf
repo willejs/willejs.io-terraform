@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "redirect_willejs_io" {
   acl    = "public-read"
 
   website {
-    redirect_all_requests_to = "www.willejs.io"
+    redirect_all_requests_to = "https://www.willejs.io"
   }
 
   tags {

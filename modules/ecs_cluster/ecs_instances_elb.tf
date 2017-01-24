@@ -5,6 +5,14 @@ resource "aws_elb" "ecs_asg_elb" {
   internal = false
 
   listener {
+    instance_port      = "8080"
+    instance_protocol  = "http"
+    lb_port            = "443"
+    lb_protocol        = "https"
+    ssl_certificate_id = "${var.ssl_cert_arn}"
+  }
+
+  listener {
     instance_port     = "8080"
     instance_protocol = "http"
     lb_port           = "80"
@@ -41,6 +49,14 @@ resource "aws_security_group" "ecs_asg_elb" {
   ingress {
     from_port = 80
     to_port   = 80
+    protocol  = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 443
+    to_port   = 443
     protocol  = "tcp"
 
     cidr_blocks = ["0.0.0.0/0"]

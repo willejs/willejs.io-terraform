@@ -56,4 +56,5 @@ module "ecs_cluster_1" {
   vpc_id          = "${module.vpc.vpc_id}"
   private_subnets = "${module.vpc.private_subnets}"
   public_subnets  = "${module.vpc.public_subnets}"
+  ssl_cert_arn    = "${data.aws_acm_certificate.willejs_io.arn}"
 }
