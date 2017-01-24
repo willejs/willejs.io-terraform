@@ -13,10 +13,10 @@ resource "aws_elb" "ecs_asg_elb" {
   }
 
   listener {
-    instance_port      = "8080"
-    instance_protocol  = "http"
-    lb_port            = "80"
-    lb_protocol        = "http"
+    instance_port     = "8080"
+    instance_protocol = "http"
+    lb_port           = "80"
+    lb_protocol       = "http"
   }
 
   health_check {
