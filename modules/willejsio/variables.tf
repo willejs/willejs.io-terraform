@@ -37,3 +37,15 @@ variable "environment" {
   default     = "prod"
   description = "application environment"
 }
+
+variable "nat_ssh_allowed_ip" {
+  type        = "string"
+  description = "ip allowed to access nat instance"
+  default     = "82.47.237.181/32"
+}
+
+variable "nat_ssh_allowed" {
+  type        = "string"
+  description = "enable nat ssh"
+  default     = false
+}
