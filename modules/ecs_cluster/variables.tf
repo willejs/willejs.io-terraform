@@ -29,10 +29,12 @@ variable "vpc_id" {
 
 // TODO: this should be a list
 variable "private_subnets" {
+  type        = "list"
   description = "private subnets for ECS cluster nodes"
 }
 
 variable "public_subnets" {
+  type        = "list"
   description = "public subnets for AWS ALB"
 }
 

@@ -2,7 +2,7 @@
 
 ## Intro
 
-This root module contains other modules and resources to create all infrastructure to run willejs.io
+This global module contains basic infra to run willejs.io
 
 ## Requirements 
 

@@ -21,19 +21,15 @@ resource "aws_ecs_service" "willejs_io" {
   }
 }
 
-resource "template_file" "ecs_task_definition_willejs_io" {
+data "template_file" "ecs_task_definition_willejs_io" {
   template = "${file("${path.module}/ecs_task_definitions/willejsio.json.tpl")}"
 
   vars {
     image_tag = "${var.willejs_io_version}"
   }
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_ecs_task_definition" "willejs_io" {
   family                = "willejsio"
-  container_definitions = "${template_file.ecs_task_definition_willejs_io.rendered}"
+  container_definitions = "${data.template_file.ecs_task_definition_willejs_io.rendered}"
 }
