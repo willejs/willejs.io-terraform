@@ -24,7 +24,7 @@ resource "aws_launch_configuration" "ecs" {
 resource "aws_autoscaling_group" "ecs" {
   name                 = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
   launch_configuration = "${aws_launch_configuration.ecs.name}"
-  vpc_zone_identifier  = ["${split(",", var.private_subnets)}"]
+  vpc_zone_identifier  = ["${var.private_subnets}"]
   load_balancers       = ["${aws_elb.ecs_asg_elb.name}"]
 
   tag {

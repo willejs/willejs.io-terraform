@@ -6,13 +6,26 @@ variable "vpc_subnet" {
 }
 
 variable "private_subnets" {
-  default     = "10.0.1.0/24,10.0.2.0/24,10.0.3.0/24"
+  type        = "list"
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
   description = "Private subnets for non public NAT routed resources"
 }
 
 variable "public_subnets" {
-  default     = "10.0.4.0/24,10.0.5.0/24,10.0.6.0/24"
+  type        = "list"
+  default     = ["10.0.4.0/24", "10.0.5.0/24"]
   description = "Public subnets for public routed resources"
+}
+
+variable "availability_zones" {
+  type        = "list"
+  default     = ["eu-west-1a", "eu-west-1b"]
+  description = "Availability zones to place the private/public subnets in"
+}
+
+variable "aws_ssh_key_file" {
+  default     = "default"
+  description = "ssh public key file"
 }
 
 variable "project_name" {
@@ -23,18 +36,4 @@ variable "project_name" {
 variable "environment" {
   default     = "prod"
   description = "application environment"
-}
-
-variable "availability_zones" {
-  default     = "eu-west-1a,eu-west-1b,eu-west-1c"
-  description = "Availability zones to place the private/public subnets in"
-}
-
-variable "nat_instance_count" {
-  default = 1
-}
-
-variable "aws_ssh_key_file" {
-  default     = "default"
-  description = "ssh public key file"
 }

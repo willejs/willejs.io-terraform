@@ -1,7 +1,7 @@
 # Create a new load balancer
 resource "aws_elb" "ecs_asg_elb" {
   name     = "${var.project_name}-${var.environment}-ecs-${var.instance_id}"
-  subnets  = ["${split(",", var.public_subnets)}"]
+  subnets  = ["${var.public_subnets}"]
   internal = false
 
   listener {
